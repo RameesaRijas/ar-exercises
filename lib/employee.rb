@@ -8,4 +8,15 @@ class Employee < ActiveRecord::Base
     less_than: 200
   }
   validates_associated :store
+
+  before_create :generate_password
+
+  # before_save :generate_password
+  # after_create :generate_password
+
+  private
+  def generate_password
+    self.password = ('a'..'z').to_a.shuffle[0..7].join
+  end
+
 end
